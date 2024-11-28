@@ -1,6 +1,5 @@
 import random
 
-# Глобальные константы
 SUITS = ["CLB", "DIA", "HRT", "SPD"]
 SUIT_NAMES = ["CLUBS", "DIAMONDS", "HEARTS", "SPADES"]
 VALUES = ["A", "2", "3", "4", "5", "6", "7", "8"]
@@ -10,7 +9,6 @@ MAX_PLAYERS = 4
 
 
 def print_title():
-    """Выводит заголовок игры точно как в BASIC версии"""
     print(" " * 27 + "OCTRIX")
     print(" " * 20 + "CREATIVE COMPUTING")
     print(" " * 18 + "MORRISTOWN, NEW JERSEY")
@@ -18,7 +16,6 @@ def print_title():
 
 
 def teach_game():
-    """Показывает правила игры точно как в BASIC версии"""
     print("  THIS IS A GAME CALLED OCTRIX.  EACH PLAYER IS DEALT 8")
     print("CARDS RANGING FROM ACE THROUGH EIGHT.  THE CARDS ARE")
     print("RANKED ACCORDING TO BRIDGE SUITS WITH THE ACE OF CLUBS THE")
@@ -41,49 +38,41 @@ def teach_game():
 
 
 def display_hands(hands):
-    # Определяем ширину колонки (35 символов)
     COLUMN_WIDTH = 35
 
-    # Вывод заголовков для каждого игрока
     for player in hands:
         if player != "COMPUTER":
             name_with_hand = f"{player}'S HAND"
-            # Вычисляем пробелы для точного центрирования
             total_spaces = COLUMN_WIDTH - len(name_with_hand)
             left_spaces = total_spaces // 2
             right_spaces = total_spaces - left_spaces
-            # Формируем отцентрированную строку
             centered_text = " " * left_spaces + name_with_hand + " " * right_spaces
             print(centered_text, end="")
     print()
 
-    # Вывод названий мастей для каждого игрока
     for player in hands:
         if player != "COMPUTER":
             # Центрируем названия мастей в колонке
             print("         CLB    DIA    HRT    SPD", end="")
     print()
 
-    # Вывод карт построчно
     for value_idx, value in enumerate(VALUES):
         for player in hands:
             if player == "COMPUTER":
                 continue
-            line = f"!{value}     "  # Начинаем с номера карты
+            line = f"!{value}     "
             for suit in SUITS:
                 card = (value_idx, SUITS.index(suit))
                 if card in hands[player]:
                     line += "!*     "
                 else:
                     line += "!      "
-            print(line[:-1], end="")  # Убираем последний пробел
-        print(f"!{value}")  # Добавляем значение карты справа
-
-    print()  # Пустая строка в конце
+            print(line[:-1], end="")
+        print(f"!{value}")
+    print()
 
 
 def initialize_game():
-    """Инициализация игры и получение информации об игроках"""
     while True:
         try:
             num_players = int(input("HOW MANY PLAYERS? ").strip())
@@ -102,7 +91,6 @@ def initialize_game():
                 break
             print("DON'T START NAME WITH SPACE, RE-")
 
-    # Добавляем компьютер только если игроков меньше 4
     if num_players < MAX_PLAYERS and num_players == 1 or (
         num_players < 4 and
         input("SHOULD I PLAY TOO(Y OR N)? ").strip().upper().startswith("Y")
@@ -114,16 +102,14 @@ def initialize_game():
 
 
 def generate_deck():
-    """Генерирует и перемешивает колоду"""
     deck = [(value, suit) for value in range(8) for suit in range(4)]
     random.shuffle(deck)
     return deck
 
 
 def deal_cards(deck, players):
-    """Раздаёт карты игрокам"""
     hands = {player: [] for player in players}
-    for i in range(8):  # 8 карт каждому игроку
+    for i in range(8):
         for player in players:
             if deck:
                 hands[player].append(deck.pop())
@@ -131,20 +117,17 @@ def deal_cards(deck, players):
 
 
 def computer_play(cards, high_wins):
-    """Логика игры компьютера"""
     if high_wins:
         return max(cards, key=lambda x: x[0] * 4 + x[1])
     return min(cards, key=lambda x: x[0] * 4 + x[1])
 
 
 def format_card(card):
-    """Форматирует карту для вывода"""
     value, suit = card
     return f"{VALUE_NAMES[value]} OF {SUIT_NAMES[suit]}"
 
 
 def parse_card_input(card_input, hand):
-    """Парсит ввод карты в формате 'VS' где V - значение, S - масть"""
     if len(card_input) != 2:
         return None
 
@@ -174,7 +157,6 @@ def parse_card_input(card_input, hand):
 
 
 def play_round(hands, round_num, high_wins=True):
-    """Проводит один раунд игры"""
     print(f"\nTRICK # {round_num} ({'HIGH' if high_wins else 'LOW'} CARD WINS)")
     played_cards = {}
 
@@ -211,7 +193,6 @@ def play_round(hands, round_num, high_wins=True):
 
 
 def calculate_score(tricks_won):
-    """Подсчёт очков"""
     score = 0
     streak = 0
     for won in tricks_won:
