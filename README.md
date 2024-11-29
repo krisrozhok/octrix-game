@@ -15,32 +15,58 @@ Octrix - это карточная игра, где каждому игроку 
 
 ## Требования
 
-* Python 3.x
+### Для Windows-версии
+- Python 3.x
+
+### Для веб-версии
+- Python 3.x
+- Flask
+- Дополнительные зависимости из requirements.txt
 
 ## Установка и запуск
 
 ### Windows
-
 1. Убедитесь, что у вас установлен Python 3.x
-    ```bash
-    python --version
-    ```
+ ```python
+ python --version
+ ```
 
 2. Склонируйте репозиторий:
-    ```bash
-    git clone https://github.com/krisrozhok/octrix-game.git
-    cd octrix-game
-    ```
+ ```bash
+ git clone https://github.com/krisrozhok/octrix-game.git
+ cd octrix-game
+ ```
 
 3. Запустите игру одним из способов:
-    * Через Python напрямую:
-        ```bash
-        python main.py
-        ```
-    * Через make (если установлен):
-        ```bash
-        make run
-        ```
+ - Через Python напрямую:
+   ```bash
+   python main.py
+   ```
+ - Через make (если установлен):
+   ```bash
+   make run
+   ```
+
+### Веб-версия
+1. Перейдите в директорию веб-версии:
+ ```bash
+ cd octrix-web
+ ```
+
+2. Установите зависимости:
+ ```bash
+ pip install -r requirements.txt
+ ```
+
+3. Запустите веб-сервер:
+ ```bash
+ python main.py
+ ```
+
+4. Откройте браузер и перейдите по адресу:
+ ```
+ http://localhost:5000
+ ```
 
 ## Как играть
 

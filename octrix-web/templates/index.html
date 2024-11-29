@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCTRIX</title>
+    <style>
+        body {
+            background-color: black;
+            margin: 0;
+            padding: 10px;
+            font-family: 'Courier New', Courier, monospace;
+            height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .container {
+            border: 1px solid white;
+            height: calc(100vh - 20px);
+            padding: 10px;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+
+        #game-output {
+            color: white;
+            white-space: pre-wrap;
+            font-size: 16px;
+            line-height: 1.2;
+        }
+
+        #input-area {
+            display: inline;
+        }
+
+        #user-input {
+            background: transparent;
+            border: none;
+            color: white;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 16px;
+            outline: none;
+            padding: 0;
+            margin: 0;
+            width: 50%;
+        }
+
+        .prompt {
+            color: white;
+        }
+
+        .container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .container {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="game-output"></div>
+        <div id="input-area">
+            <span id="prompt" class="prompt"></span>
+            <input type="text" id="user-input" autocomplete="off" disabled>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script src="{{ url_for('static', filename='js/game.js') }}"></script>
+</body>
+</html>
